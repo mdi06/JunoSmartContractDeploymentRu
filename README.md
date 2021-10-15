@@ -5,6 +5,7 @@
 Rust и Junod [installation page.](https://docs.junochain.com/smart-contracts/installation)
 
 Для начала , установим [rustup](https://rustup.rs/).
+
 ```
 $ rustup default stable
 $ cargo version
@@ -27,6 +28,7 @@ $ make install
 $ which junod
 ```
 # Теперь требуется установить CosmWasm
+
 ```
 $ git clone https://github.com/CosmWasm/cosmwasm-examples
 $ cd cosmwasm-examples
@@ -40,6 +42,7 @@ $ cd contracts/erc20
 $ rustup default stable
 $ cargo wasm
 ```
+
 Нам нужно ограничить использование газа. Для этого мы пишем:
 ```
 $ sudo docker run --rm -v "$(pwd)":/code \
@@ -50,6 +53,7 @@ $ sudo docker run --rm -v "$(pwd)":/code \
 Это создаст cw_erc20.wasm в каталоге 'artifacts'.
 # Выгружаем
 Стоит заметить, что вам нужно будет узнать адресс активной rpc ноды. На момент написания гайда была использована https://rpc.juno.giansalex.dev:443/
+
 ```
 $ cd artifacts
 $ junod tx wasm store cw_erc20.wasm  --from <your-key> --chain-id=<chain-id> --gas auto --node  https://rpc.juno.giansalex.dev:443/
@@ -77,7 +81,7 @@ $ junod tx wasm store cw_erc20.wasm  --from <your-key> --chain-id=<chain-id> --g
 < '{"name":"Aqua Coin","symbol":"aqua","decimals":83,"initial_balances":[{"address":" juno1ucdafm0s4uka6lnmaa7dl7tt489l2wfv3s3wfl","amount":"12345678000"}]}'
 ```
 # Теперь нужно создать экземпляр контракта
-Обратите внимание, что --amount используется для инициализации новой учетной записи, связанной с контрактом. В приведенном ниже примере 82 - это значение $ CODE_ID.
+Обратите внимание, что --amount используется для инициализации новой учетной записи, связанной с контрактом. В приведенном ниже примере 83 - это значение $ CODE_ID.
 ```js
 junod tx wasm instantiate 83 \
     '{"name":"Aqua Coin","symbol":"AQUA","decimals":83,"initial_balances":[{"address":" juno1ucdafm0s4uka6lnmaa7dl7tt489l2wfv3s3wfl ","amount":"12345678000"}]}' \
@@ -86,7 +90,7 @@ junod tx wasm instantiate 83 \
 
 Посмотрите вывод и найдите адрес контракта, например, juno1a2b ....
 
-Для удобства использования можем создать переменную нашего смарт-контракта :
+ Для удобства использования можем создать переменную нашего смарт-контракта :
 ` CONTRACT_ADDR=[аддресс вашего контракта из предыдущей команды]`  и проверить `echo $CONTRACT_ADDR`
 
 Теперь делаем запрос нашего контракта 
